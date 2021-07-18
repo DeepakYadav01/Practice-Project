@@ -8,5 +8,5 @@ import com.nagarro.telecompractice.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	public User getUserByEmail(String Email);
+	public User getUserByEmail(String email);
 }

@@ -1,6 +1,7 @@
 package com.nagarro.telecompractice.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nagarro.telecompractice.model.User;
@@ -17,6 +18,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired(required = true)
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public User getUserByEmail(String email) {
@@ -26,10 +30,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	@Override
 	public User saveUser(User user) {
 		String password = RandomPasswordGenerator.generatePassword();
-		user.setPassword(password);
+		user.setPassword(bCryptPasswordEncoder.encode(password));
 		User SuccesfullyRegisteredUser = userRepository.save(user);
 		String mailResponse = mailService.sendMailToRegisteredUser(SuccesfullyRegisteredUser.getEmail(),password);
-		System.out.println(mailResponse);
 		return SuccesfullyRegisteredUser;
 	}
 
