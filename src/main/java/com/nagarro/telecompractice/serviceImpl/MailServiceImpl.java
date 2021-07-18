@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
 		String toMail = username;
 		String msg = "Welcome !!\n\n"
 				+"Subject: Your Login Credentials :\n\n"
-				+ "Username : " + username + " \nPassword: " + password
+				+ "Username: " + username + " \nPassword: " + password
 				+ "\n\nPlease contact us at js794017@gmail.com if you have any questions.\n\n" + "Thank you.\n";
 				
 		try {
