@@ -33,5 +33,10 @@ public class TaskController {
 
 	}
 	
+	@RequestMapping(value = "/update-task", method = RequestMethod.PUT)
+	public void updateTask(@RequestBody Task task) {
+		taskRepository.save(task);
+	}
+	
 	
 }
