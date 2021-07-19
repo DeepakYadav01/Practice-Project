@@ -1,5 +1,7 @@
 package com.nagarro.telecompractice.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +26,32 @@ public class TaskController {
 	@Autowired
 	private TaskRepository taskRepository;
 
-	@RequestMapping(value = "/{username}/create-task", method = RequestMethod.POST)
-	public void createTask(@PathVariable(value = "username") String username, @RequestBody Task task) {
-		
-		User user = userRepository.getUserByEmail(username);
+	@RequestMapping(value = "/create-task", method = RequestMethod.POST)
+	public void createTask(@RequestBody Task task, Principal principal) {
+
+		User user = userRepository.getUserByEmail(principal.getName());
 		task.setUser(user);
 		taskRepository.save(task);
+
+	}
+	
+	
+	@RequestMapping(value = "/update-task", method = RequestMethod.PUT)
+	public void updateTask( @RequestBody Task task,Principal principal) {
+		
+		User user = userRepository.getUserByEmail(principal.getName());
+		task.setUser(user);
+		taskRepository.save(task);
+
+	}
+	
+	
+	
+	@RequestMapping(value = "/delete-task/{id}", method = RequestMethod.DELETE)
+	public String deleteTask(@PathVariable(value = "id") int id) {
+		
+		taskRepository.deleteById(id);
+		return "Task deleted successfully!!";
 
 	}
 	
