@@ -1,7 +1,5 @@
 package com.nagarro.telecompractice.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +10,6 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 
 @Entity
 public class Task {
@@ -23,7 +18,7 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private Date dueDate;
+	private String dueDate;
 	private int priority;
 	
 	@ManyToOne(optional = false)
@@ -35,7 +30,7 @@ public class Task {
 		super();
 	}
 
-	public Task(int id, String name, Date dueDate, int priority, User user) {
+	public Task(int id, String name, String dueDate, int priority, User user) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,11 +55,11 @@ public class Task {
 		this.name = name;
 	}
 
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 
