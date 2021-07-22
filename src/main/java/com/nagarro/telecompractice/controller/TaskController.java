@@ -14,6 +14,7 @@ import com.nagarro.telecompractice.model.Task;
 import com.nagarro.telecompractice.model.User;
 import com.nagarro.telecompractice.repository.TaskRepository;
 import com.nagarro.telecompractice.repository.UserRepository;
+import com.nagarro.telecompractice.service.TaskService;
 
 @RestController
 @CrossOrigin
@@ -21,27 +22,18 @@ import com.nagarro.telecompractice.repository.UserRepository;
 public class TaskController {
 	
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private TaskRepository taskRepository;
+	private TaskService taskService;
 
 	@RequestMapping(value = "/create-task", method = RequestMethod.POST)
 	public void createTask(@RequestBody Task task, Principal principal) {
-
-		User user = userRepository.getUserByEmail(principal.getName());
-		task.setUser(user);
-		taskRepository.save(task);
+		taskService.createTask(task, principal.getName());
 
 	}
 	
 	
 	@RequestMapping(value = "/update-task", method = RequestMethod.PUT)
 	public void updateTask( @RequestBody Task task,Principal principal) {
-		
-		User user = userRepository.getUserByEmail(principal.getName());
-		task.setUser(user);
-		taskRepository.save(task);
+		taskService.updateTask(task, principal.getName());
 
 	}
 	
@@ -49,9 +41,7 @@ public class TaskController {
 	
 	@RequestMapping(value = "/delete-task/{id}", method = RequestMethod.DELETE)
 	public String deleteTask(@PathVariable(value = "id") int id) {
-		
-		taskRepository.deleteById(id);
-		return "Task deleted successfully!!";
+		return taskService.deleteTask(id);
 
 	}
 	

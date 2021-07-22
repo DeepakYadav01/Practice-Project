@@ -9,10 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableScheduling
-public class EmployeeRestApi1Application {
+public class TelecomPracticeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmployeeRestApi1Application.class, args);
+		SpringApplication.run(TelecomPracticeApplication.class, args);
 	}
 
 }
