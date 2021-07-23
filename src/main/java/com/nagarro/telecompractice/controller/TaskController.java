@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nagarro.telecompractice.model.Task;
-import com.nagarro.telecompractice.model.User;
-import com.nagarro.telecompractice.repository.TaskRepository;
-import com.nagarro.telecompractice.repository.UserRepository;
 import com.nagarro.telecompractice.service.TaskService;
 
 @RestController

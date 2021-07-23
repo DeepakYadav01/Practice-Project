@@ -1,7 +1,5 @@
 package com.nagarro.telecompractice.service;
 
-import java.security.Principal;
-
 import com.nagarro.telecompractice.model.Task;
 
 public interface TaskService {

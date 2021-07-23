@@ -1,5 +1,6 @@
 package com.nagarro.telecompractice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,14 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(nullable = false)
 	private String name;
+	
+	@Column(nullable = false)
 	private String dueDate;
+	
+	@Column(nullable = false)
 	private int priority;
 	
 	@ManyToOne(optional = false)
