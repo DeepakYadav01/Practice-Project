@@ -10,7 +10,7 @@ In this application you can register/login and after login you can create the ta
 - Send notification to user if created-task has less than 24 hours left
 
 #### Technology stack
-** Backend **
+##### Backend 
 - OpenJdk 8
 - Spring boot 2.5
 - Spring Security
@@ -20,11 +20,11 @@ In this application you can register/login and after login you can create the ta
 - Maven
 -The backend server is running on localhost:8085.
 
-** Run in Docker **
+##### Run in Docker 
 ---
 - docker build -t todo-docker .
 - docker run -p 9090:8085 todo-docker
 ---
 
-** Note : ** todo-docker is my image name you can change the name of your docker image and also you can change the port from 9090 to anything. 
+_Note_ : todo-docker is my image name you can change the name of your docker image and also you can change the port from 9090 to anything. 
 
