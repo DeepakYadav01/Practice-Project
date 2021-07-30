@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JwtUtilImpl implements JwtUtil{
 	
 
-    private String SECRET_KEY = "secretKey";
+    private final String SECRET_KEY = "secretKey";
     
     @Override
     public String extractUsername(String token) {

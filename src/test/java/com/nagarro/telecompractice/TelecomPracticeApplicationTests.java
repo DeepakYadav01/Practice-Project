@@ -77,7 +77,7 @@ class TelecomPracticeApplicationTests {
 		
 		when(userRepository.getUserByEmail(email)).thenReturn(null);
 		when(taskRepository.save(task)).thenThrow(PropertyValueException.class);
-		assertThrows(PropertyValueException.class, ()->taskService.createTask(task,null));
+		assertThrows(PropertyValueException.class, ()->taskService.createAndUpdateTask(task,null));
 	}
 
 }

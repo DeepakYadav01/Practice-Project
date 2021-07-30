@@ -20,7 +20,7 @@ public class NotificationSenderService {
 	@Autowired
 	private MailService mailService;
 	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 86400000)
 	public void sendNotification() {
 		
 		String[] currentDate = new Date().toString().split(" ");

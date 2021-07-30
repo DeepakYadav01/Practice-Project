@@ -1,6 +1,8 @@
 package com.nagarro.telecompractice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,26 +26,26 @@ public class Authentication {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
-	JwtUtil jwtTokenUtil;
+	private JwtUtil jwtTokenUtil;
 	
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public String createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+	public ResponseEntity<String> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws BadCredentialsException {
 		try {
 				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 						authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 			
 		} catch (BadCredentialsException e) {
-			throw new Exception("Incorrect username or password", e);
+			throw new BadCredentialsException("Incorrect username or password", e);
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-		return jwt;
+		return new ResponseEntity<String>(jwt,HttpStatus.OK);
 	}
 	
 

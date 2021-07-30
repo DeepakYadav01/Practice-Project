@@ -20,7 +20,7 @@ public class MailServiceImpl implements MailService {
 	JavaMailSender mailSender;
 
 	@Override
-	public String sendMailToRegisteredUser(String username, String password) {
+	public void sendMailToRegisteredUser(String username, String password) {
 
 		String toMail = username;
 		String msg = "Welcome !!\n\n"
@@ -30,15 +30,14 @@ public class MailServiceImpl implements MailService {
 				
 		try {
 			sendMailWithLoginCredentials(toMail, msg);
-			return Constants.mailSuccess;
-		} catch (Exception e) {
-			return Constants.mailError + e;
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
 
 	}
 	
 	@Override
-	public String sendNotificationToUser(String username, Task task) {
+	public void sendNotificationToUser(String username, Task task) {
 
 		String toMail = username;
 		String subject = "Pending task alert!";
@@ -50,9 +49,8 @@ public class MailServiceImpl implements MailService {
 				
 		try {
 			sendMailWithTaskAlert(toMail, msg, subject);
-			return Constants.mailSuccess;
-		} catch (Exception e) {
-			return Constants.mailError + e;
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -67,13 +65,13 @@ public class MailServiceImpl implements MailService {
 
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setTo(toMail);
-			helper.setSubject(Constants.Subject);
+			helper.setSubject(Constants.SUBJECT);
 			helper.setText(msg);
 
 			mailSender.send(message);
 
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MessagingException();
 		}
 	}
 	
@@ -92,7 +90,7 @@ public class MailServiceImpl implements MailService {
 			mailSender.send(message);
 
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			throw new MessagingException();
 		}
 	}
 	

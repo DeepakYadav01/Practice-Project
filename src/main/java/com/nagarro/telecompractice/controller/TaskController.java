@@ -23,14 +23,14 @@ public class TaskController {
 
 	@RequestMapping(value = "/create-task", method = RequestMethod.POST)
 	public void createTask(@RequestBody Task task, Principal principal) {
-		taskService.createTask(task, principal.getName());
+		taskService.createAndUpdateTask(task, principal.getName());
 
 	}
 	
 	
 	@RequestMapping(value = "/update-task", method = RequestMethod.PUT)
 	public void updateTask( @RequestBody Task task,Principal principal) {
-		taskService.updateTask(task, principal.getName());
+		taskService.createAndUpdateTask(task, principal.getName());
 
 	}
 	

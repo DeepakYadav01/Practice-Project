@@ -17,7 +17,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	private UserRepository userRepository; 
 	
 	@Autowired
-	MailService mailService;
+	private MailService mailService;
 	
 	@Autowired(required = true)
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,9 +31,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	public User saveUser(User user) {
 		String password = RandomPasswordGenerator.generatePassword();
 		user.setPassword(bCryptPasswordEncoder.encode(password));
-		User SuccesfullyRegisteredUser = userRepository.save(user);
-		String mailResponse = mailService.sendMailToRegisteredUser(SuccesfullyRegisteredUser.getEmail(),password);
-		return SuccesfullyRegisteredUser;
+		User succesfullyRegisteredUser = userRepository.save(user);
+		mailService.sendMailToRegisteredUser(succesfullyRegisteredUser.getEmail(),password);
+		return succesfullyRegisteredUser;
 	}
 
 }

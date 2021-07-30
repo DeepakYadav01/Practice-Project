@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
 	private TaskRepository taskRepository;
 	
 	@Override
-	public void createTask(Task task, String email) {
+	public void createAndUpdateTask(Task task, String email) {
 
 		User user = userRepository.getUserByEmail(email);
 		task.setUser(user);
@@ -27,14 +27,6 @@ public class TaskServiceImpl implements TaskService {
 
 	}
 	
-	@Override
-	public void updateTask(Task task,String email) {
-		
-		User user = userRepository.getUserByEmail(email);
-		task.setUser(user);
-		taskRepository.save(task);
-
-	}
 	
 	
 	@Override
